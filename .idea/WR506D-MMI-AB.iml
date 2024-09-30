@@ -2,7 +2,6 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/application/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/application/src" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/application/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/s3demo/tests" isTestSource="true" />
@@ -142,6 +141,11 @@
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/api-platform/core" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/nelmio/cors-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/willdurand/negotiation" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/webonyx/graphql-php" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/doctrine/data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/doctrine/doctrine-fixtures-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/xylis/faker-cinema-providers" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

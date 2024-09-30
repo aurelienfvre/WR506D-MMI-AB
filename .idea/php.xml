@@ -276,6 +276,11 @@
       <path value="$PROJECT_DIR$/application/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/application/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/application/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/application/vendor/webonyx/graphql-php" />
+      <path value="$PROJECT_DIR$/application/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/application/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/application/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/application/vendor/xylis/faker-cinema-providers" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
