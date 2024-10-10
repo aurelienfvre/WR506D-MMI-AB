@@ -8,10 +8,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
+
 
 
 #[ORM\Entity(repositoryClass: ActorRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[ApiFilter(SearchFilter::class, properties: ['lastname' => 'partial', 'firstname' => 'partial', 'movies.title' => 'partial'])]
+#[ApiFilter(DateFilter::class, properties: ['created_at', 'updated_at', 'dob', 'deathDate'])]
+#[ApiFilter(RangeFilter::class, properties: ['awards'])]
+#[ApiFilter(ExistsFilter::class, properties: ['deathDate'])]
+#[ApiFilter(OrderFilter::class, properties: ['dob' => 'ASC', 'deathDate' => 'DESC'])]
+#[ApiFilter(OrderFilter::class, properties: ['firstname','lastname'])]
 #[ApiResource]
 class Actor
 {

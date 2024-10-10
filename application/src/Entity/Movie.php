@@ -8,9 +8,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'actors.lastname' => 'partial', 'categories.title' => 'partial'])]
+#[ApiFilter(DateFilter::class, properties: ['created_at', 'updated_at', 'release_date'])]
+#[ApiFilter(RangeFilter::class, properties: ['entries', 'rating', 'duration'])]
+#[ApiFilter(OrderFilter::class, properties: ['title', 'release_date', 'created_at'])]
+#[ApiFilter(ExistsFilter::class, properties: ['release_date'])]
+
+
 class Movie
 {
     #[ORM\Id]
