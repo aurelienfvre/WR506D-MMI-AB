@@ -14,16 +14,15 @@ use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[ApiResource]
-#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'actors.lastname' => 'partial', 'categories.title' => 'partial'])]
-#[ApiFilter(DateFilter::class, properties: ['created_at', 'updated_at', 'release_date'])]
-#[ApiFilter(RangeFilter::class, properties: ['entries', 'rating', 'duration'])]
-#[ApiFilter(OrderFilter::class, properties: ['title', 'release_date', 'created_at'])]
-#[ApiFilter(ExistsFilter::class, properties: ['release_date'])]
-
-
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'director' => 'partial', 'actors.lastname' => 'partial'])]
+#[ApiFilter(DateFilter::class, properties: ['releaseDate', 'createdAt', 'updatedAt'])]
+#[ApiFilter(RangeFilter::class, properties: ['rating', 'duration', 'budget', 'boxOffice'])]
+#[ApiFilter(OrderFilter::class, properties: ['title', 'releaseDate', 'rating'])]
+#[ApiFilter(ExistsFilter::class, properties: ['trailer'])]
 class Movie
 {
     #[ORM\Id]
@@ -32,12 +31,20 @@ class Movie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Title cannot be blank")]
+    #[Assert\Length(
+        min: 1,
+        max: 255,
+        minMessage: "Title must be at least {{ limit }} character long",
+        maxMessage: "Title cannot be longer than {{ limit }} characters"
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $release_date = null;
+    private ?\DateTimeInterface $releaseDate = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Director name cannot be blank")]
     private ?string $director = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -47,12 +54,19 @@ class Movie
     private ?string $media = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero(message: "Number of entries must be zero or positive")]
     private ?int $entries = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    #[Assert\Range(
+        min: 0,
+        max: 5,
+        notInRangeMessage: "Rating must be between {{ min }} and {{ max }}"
+    )]
     private ?float $rating = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Positive(message: "Duration must be positive")]
     private ?int $duration = null;
 
     /**
@@ -68,10 +82,22 @@ class Movie
     private Collection $categories;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updated_at = null;
+    private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url(message: "The URL '{{ value }}' is not a valid URL")]
+    private ?string $trailer = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero(message: "Budget must be zero or positive")]
+    private ?int $budget = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero(message: "Box office must be zero or positive")]
+    private ?int $boxOffice = null;
 
     public function __construct()
     {
@@ -98,12 +124,12 @@ class Movie
 
     public function getReleaseDate(): ?\DateTimeInterface
     {
-        return $this->release_date;
+        return $this->releaseDate;
     }
 
-    public function setReleaseDate(?\DateTimeInterface $release_date): static
+    public function setReleaseDate(?\DateTimeInterface $releaseDate): static
     {
-        $this->release_date = $release_date;
+        $this->releaseDate = $releaseDate;
 
         return $this;
     }
@@ -187,7 +213,6 @@ class Movie
     {
         return $this->actors;
     }
-
     public function addActor(Actor $actor): static
     {
         if (!$this->actors->contains($actor)) {
@@ -230,24 +255,60 @@ class Movie
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): static
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getTrailer(): ?string
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer(?string $trailer): static
+    {
+        $this->trailer = $trailer;
+
+        return $this;
+    }
+
+    public function getBudget(): ?int
+    {
+        return $this->budget;
+    }
+
+    public function setBudget(?int $budget): static
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
+    public function getBoxOffice(): ?int
+    {
+        return $this->boxOffice;
+    }
+
+    public function setBoxOffice(?int $boxOffice): static
+    {
+        $this->boxOffice = $boxOffice;
 
         return $this;
     }
