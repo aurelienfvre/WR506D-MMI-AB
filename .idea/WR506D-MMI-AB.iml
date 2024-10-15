@@ -146,6 +146,8 @@
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/doctrine/doctrine-fixtures-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/fakerphp/faker" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/xylis/faker-cinema-providers" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/jms/metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/vich/uploader-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
