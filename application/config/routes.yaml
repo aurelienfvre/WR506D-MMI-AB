@@ -3,3 +3,10 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+    # config/routes.yaml
+auth:
+    path: /api/auth
+    methods: [ 'POST' ]
+
+api_login_check:
+    path: /api/auth
