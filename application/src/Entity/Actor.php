@@ -56,7 +56,6 @@ class Actor
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Nationality cannot be blank")]
-    #[Assert\Country(message: "{{ value }} is not a valid country")]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 255, nullable: true)]
