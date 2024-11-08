@@ -286,6 +286,12 @@
       <path value="$PROJECT_DIR$/application/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/application/vendor/lexik/jwt-authentication-bundle" />
       <path value="$PROJECT_DIR$/application/vendor/lcobucci/clock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
@@ -297,7 +303,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/application/vendor/autoload.php" />
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/s3demo/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/s3demo/vendor/autoload.php" use_configuration_file="true" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/s3demo/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
