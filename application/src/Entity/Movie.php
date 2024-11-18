@@ -18,7 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[ApiResource]
-#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'director' => 'partial', 'actors.lastname' => 'partial'])]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'director' =>
+    'partial', 'actors.lastname' => 'partial'])]
 #[ApiFilter(DateFilter::class, properties: ['releaseDate', 'createdAt', 'updatedAt'])]
 #[ApiFilter(RangeFilter::class, properties: ['rating', 'duration', 'budget', 'boxOffice'])]
 #[ApiFilter(OrderFilter::class, properties: ['title', 'releaseDate', 'rating'])]
